@@ -1,0 +1,42 @@
+
+<!DOCTYPE html>
+<html lang="ru">
+    <head>
+        <meta charset="UTF-8">
+        <title>Галерея</title>
+        <link rel="stylesheet" href="css.css">
+    </head>
+    <body class="body">
+        <h1 class="title">Галерея</h1>
+        <button class="btn">
+            <h1 class="text">Загрузить картинки</h1>
+        </button>
+        <div class = "containerImg" ></div>
+        <script >
+            const btn = document.querySelector(".btn").addEventListener('click', async function () {
+    const container = document.querySelector(".containerImg")
+    try {
+        const res = await fetch("https://api.thecatapi.com/v1/images/search?limit=10");
+        if (!res.ok) {
+          throw new Error("Ошибка");
+        }
+        const data = await res.json();
+        if (data) {
+            data.forEach(image => {
+                const img = document.createElement('img');
+                img.src = image.url; 
+                container.appendChild(img);
+            });
+        }}
+
+        catch(event){
+            console.error("Ошибка");
+        }
+
+ });
+ 
+        </script>
+
+        
+    </body>
+</html>
